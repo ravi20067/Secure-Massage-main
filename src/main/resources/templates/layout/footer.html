@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        /* ===============================
+           GLOBAL FOOTER (ISOLATED)
+           =============================== */
+
+        footer {
+            background: linear-gradient(
+                135deg,
+                rgba(2,6,23,.95),
+                rgba(2,6,23,.85)
+            );
+            border-top: 1px solid rgba(255,255,255,.08);
+            position: relative;
+            overflow: hidden;
+            animation: footerFadeUp .8s ease;
+        }
+
+        footer::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255,255,255,.05),
+                transparent
+            );
+            transform: translateX(-100%);
+            animation: footerShine 10s infinite linear;
+        }
+
+        footer p {
+            font-size: .95rem;
+            letter-spacing: .4px;
+            opacity: .85;
+            margin: 0;
+        }
+
+        footer p span {
+            color: #6366f1;
+            font-weight: 600;
+        }
+
+        /* ===============================
+           RESPONSIVENESS
+           =============================== */
+
+        @media (max-width: 576px) {
+            footer {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            footer p {
+                font-size: .85rem;
+                line-height: 1.4;
+            }
+        }
+
+        /* ===============================
+           ANIMATIONS (FOOTER ONLY)
+           =============================== */
+
+        @keyframes footerFadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes footerShine {
+            0%   { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+    </style>
+</head>
+
+<body>
+<footer class="text-center text-secondary py-4 mt-5" th:fragment="footer">
+    <p>
+        © 2025 <span>SecureChat</span> | End-to-End Encrypted Messaging
+    </p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        /* ===============================
+           GLOBAL HEADER (ISOLATED)
+           =============================== */
+
+        /* Scope everything to navbar only */
+        nav.navbar {
+            backdrop-filter: blur(12px);
+            background: linear-gradient(
+                135deg,
+                rgba(2,6,23,.75),
+                rgba(2,6,23,.65)
+            ) !important;
+            border-bottom: 1px solid rgba(255,255,255,.08);
+            animation: headerSlideDown .6s ease;
+        }
+
+        nav.navbar .navbar-brand {
+            font-size: 1.4rem;
+            letter-spacing: .5px;
+            transition: .3s ease;
+            white-space: nowrap;
+        }
+
+        nav.navbar .navbar-brand:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 18px rgba(99,102,241,.7);
+        }
+
+        /* Greeting */
+        nav.navbar .nav-item.text-light {
+            font-size: .95rem;
+            opacity: .85;
+            animation: headerFadeIn .8s ease;
+        }
+
+        /* Buttons (navbar-only) */
+        nav.navbar .btn {
+            border-radius: 999px;
+            padding: 8px 18px;
+            font-weight: 500;
+            transition: all .3s ease;
+            white-space: nowrap;
+        }
+
+        nav.navbar .btn-primary {
+            background: linear-gradient(135deg, #4f46e5, #2563eb);
+            border: none;
+            box-shadow: 0 8px 25px rgba(79,70,229,.45);
+        }
+
+        nav.navbar .btn-primary:hover {
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 12px 40px rgba(79,70,229,.65);
+        }
+
+        nav.navbar .btn-outline-light:hover {
+            background: #fff;
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+        nav.navbar .btn-danger {
+            background: linear-gradient(135deg, #dc2626, #ef4444);
+            border: none;
+            box-shadow: 0 10px 30px rgba(239,68,68,.5);
+        }
+
+        nav.navbar .btn-danger:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 14px 40px rgba(239,68,68,.7);
+        }
+
+        /* Logout shine animation */
+        nav.navbar .btn-animated {
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav.navbar .btn-animated::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255,255,255,.4),
+                transparent
+            );
+            transform: translateX(-100%);
+            transition: .6s;
+        }
+
+        nav.navbar .btn-animated:hover::after {
+            transform: translateX(100%);
+        }
+
+        /* Fade-up item animation */
+        nav.navbar .fade-up {
+            animation: headerFadeUp .7s ease forwards;
+        }
+
+        /* ===============================
+           RESPONSIVENESS
+           =============================== */
+
+        @media (max-width: 768px) {
+            nav.navbar .navbar-nav {
+                padding-top: 10px;
+                gap: 10px;
+            }
+
+            nav.navbar .nav-item.text-light {
+                display: none; /* hide greeting on small screens */
+            }
+
+            nav.navbar .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* ===============================
+           ANIMATIONS (HEADER ONLY)
+           =============================== */
+
+        @keyframes headerSlideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes headerFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes headerFadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark px-3" th:fragment="header">
+    <button class="btn btn-outline-light d-md-none" id="sidebarToggle">
+        <i class="bi bi-list"></i>
+    </button>
+
+
+    <a class="navbar-brand fw-bold" href="/">
+        🔐 SecureChat
+    </a>
+
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto align-items-center gap-2">
+
+            <!-- GREETING (always) -->
+            <li class="nav-item me-3 text-light">
+                👋 Hello, Welcome!
+            </li>
+
+            <!-- HOME PAGE -->
+            <li th:if="${currentPage == 'home'}" class="nav-item fade-up">
+                <a class="btn btn-outline-light me-2" href="/login">Login</a>
+                <a class="btn btn-primary" href="/register">Sign Up</a>
+            </li>
+
+            <!-- LOGIN PAGE -->
+            <li th:if="${currentPage == 'login'}" class="nav-item fade-up">
+                <a class="btn btn-primary" href="/register">Sign Up</a>
+            </li>
+
+            <!-- REGISTER PAGE -->
+            <li th:if="${currentPage == 'register'}" class="nav-item fade-up">
+                <a class="btn btn-primary" href="/login">Login</a>
+            </li>
+
+            <!-- LOGOUT -->
+            <li th:if="${currentPage == 'loginUser'}" class="nav-item fade-up">
+                <a class="btn btn-danger px-4 btn-animated" href="/perform_logout">
+                    Logout
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+</body>
+</html>

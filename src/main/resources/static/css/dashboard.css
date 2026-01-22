@@ -1,0 +1,52 @@
+/* Sidebar wrapper */
+.sidebar-wrapper {
+    min-height: 100vh;
+    background-color: #020617;
+}
+
+/* Sidebar */
+.sidebar {
+    height: 100%;
+    background-color: #020617;
+}
+
+body {
+    background: radial-gradient(circle at top, #111827, #000);
+    color: #f8fafc;
+    min-height: 100vh;
+}
+:root {
+    --bs-body-bg: #020617;
+    --bs-body-color: #f8fafc;
+
+    --bs-secondary-color: #ffffff;   /* text-muted color */
+    --bs-secondary-color-rgb: 148,163,184;
+
+    --bs-tertiary-color: #64748b;
+}
+
+/* Nav links */
+.sidebar .nav-link {
+    color: #cbd5f5;
+    border-radius: 6px;
+    padding: 10px 12px;
+}
+
+/* Hover */
+.sidebar .nav-link:hover {
+    background-color: #1e293b;
+    color: #ffffff;
+}
+
+/* Active */
+.sidebar .nav-link.active {
+    background-color: #4f46e5;
+    color: #ffffff;
+}
+
+/* Mobile handling */
+@media (max-width: 767px) {
+    .sidebar-wrapper {
+        min-height: auto;
+    }
+}
